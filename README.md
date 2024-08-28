@@ -76,7 +76,7 @@ interface BasicUser {
   }
   ```
 
-## **Tipe generic**
+### **Tipe generic**
 
 Generik di TypeScript memungkinkan penulisan kode yang dapat bekerja dengan berbagai tipe data sekaligus menjaga keamanan tipe. Generik memudahkan penulisan kode yang dapat digunakan kembali.
 
