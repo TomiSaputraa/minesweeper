@@ -1,0 +1,25 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomiSaputraa/minesweeper.git"
+  },
+  "keywords": [
+    "React"
+  ],
+  "author": "Tomi Saputra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TomiSaputraa/minesweeper/issues"
+  },
+  "homepage": "https://github.com/TomiSaputraa/minesweeper#readme",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
