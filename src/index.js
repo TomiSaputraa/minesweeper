@@ -14,13 +14,7 @@ var user = {
     age: 23,
     married: false,
 };
-var users = {
-    // contoh penggunaan type untuk data objek
-    name: "Tomas",
-    age: 23,
-    married: false,
-};
-var usersArray = [user, users, user];
+var usersArray = [user, user, user];
 // dari pada menulis seperti ini
 /*
 function firstUser(usersArray: BasicUser[]): BasicUser {
@@ -36,8 +30,9 @@ var user2 = {
     name: "Tomi",
     age: 23,
     married: false,
-    permission: ["manager", "admin"],
+    permission: ["admin", "manager"],
 };
+console.log(user2);
 var user3 = {
     name: "anto",
     age: 22,
@@ -46,3 +41,11 @@ var user3 = {
 var mul = function (a, b) { return a * b; };
 // contoh function tanpa type
 var add = function (a, b) { return a + b; };
+var userFull = {
+    name: "antip",
+    age: 21,
+    married: false,
+    account: 12,
+    permission: ["admin", "user", "manager"],
+};
+console.log(userFull);

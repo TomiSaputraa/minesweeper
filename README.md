@@ -94,3 +94,45 @@ const stringArray: string[] = ["apple", "banana", "orange"];
 const firstNumber = getFirstElement<number>(numberArray);
 const firstString = getFirstElement<string>(stringArray);
 ```
+
+### Extends types, multiple generic type, union types
+
+- **Extends types**
+
+Dalam TypeScript, kita dapat memperluas type menggunakan &, contoh:
+
+```ts
+type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AdvanceUser;
+```
+
+- **Union Type**
+
+Union types memungkinkan sebuah variabel untuk memiliki lebih dari satu tipe. Ini sangat berguna ketika sebuah nilai bisa berupa beberapa tipe yang berbeda.
+
+  ```ts
+  // Union Type
+  type Permission = "admin" | "user" | "manager";
+
+  // atau digunakan dalam tipe data objek
+  ```
+
+
+- **Multiple Generic Types**
+
+TypeScript mendukung penggunaan beberapa tipe generik dalam satu fungsi atau kelas. Ini memungkinkan kita untuk membuat kode yang lebih fleksibel dan dapat digunakan kembali.
+
+```ts
+type AdvanceUser = {
+  account: number;
+};
+
+type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AdvanceUser;
+
+const userFull: FullUser<boolean, Permission> = {
+  name: "antip",
+  age: 21,
+  married: false,
+  account: 12,
+  permission: ["admin", "user", "manager"],
+};
+```

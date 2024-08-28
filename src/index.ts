@@ -17,12 +17,12 @@ type User = {
 // interface : Interface adalah fitur TypeScript yang memungkinkan Anda menentukan struktur, properti, dan metode objek.
 
 // Type data generic : Generik di TypeScript memungkinkan penulisan kode yang dapat bekerja dengan berbagai tipe data sekaligus menjaga keamanan tipe. Generik memudahkan penulisan kode yang dapat digunakan kembali.
-interface BasicUser<A = boolean> {
+interface BasicUser<A = boolean, P = string[]> {
   //contoh generic dengan tipe data default
   name: string;
   age: number;
   married: A;
-  permission?: string[]; // tanda `?` tanda tidak require atau boleh tidak di isi
+  permission?: P[]; // tanda `?` tanda tidak require atau boleh tidak di isi
 }
 
 // interface dengan extends
@@ -53,12 +53,13 @@ function getFirst<T>(arr: T[]): T {
 
 console.log(getFirst<BasicUser>(usersArray));
 
-const user2: BasicUser = {
+const user2: BasicUser<boolean, Permission> = {
   name: "Tomi",
   age: 23,
   married: false,
-  permission: ["manager", "admin"],
+  permission: ["admin", "manager"],
 };
+console.log(user2);
 
 const user3: User = {
   name: "anto",
@@ -72,3 +73,23 @@ const mul: MathFunc = (a, b) => a * b;
 
 // contoh function tanpa type
 const add = (a: number, b: number): number => a + b;
+
+// Union Type
+type Permission = "admin" | "user" | "manager";
+
+// Extends type
+type AdvanceUser = {
+  account: number;
+};
+
+type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AdvanceUser;
+
+const userFull: FullUser<boolean, Permission> = {
+  name: "antip",
+  age: 21,
+  married: false,
+  account: 12,
+  permission: ["admin", "user", "manager"],
+};
+
+console.log(userFull);
