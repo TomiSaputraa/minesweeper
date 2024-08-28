@@ -14,3 +14,15 @@
 
     lalu init typescript :
     `npx tsc`
+
+3. Eslint dan prettier
+   
+   ESLint menganalisis kode Anda secara statis untuk menemukan masalah dengan cepat. ESLint sudah terpasang di sebagian besar editor teks dan Anda dapat menjalankan ESLint sebagai bagian dari alur integrasi berkelanjutan Anda.
+
+   cara setup bisa menggunakan : `yarn create @eslint/config` atau `npm init @eslint/config@latest`
+
+   maka eslint akan meminta beberapa settingan setup dan install depedency
+
+    Prettier digunakan sebagai code formatting
+
+    cara install `yarn add --dev --exact prettier`

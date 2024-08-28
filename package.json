@@ -20,6 +20,13 @@
   "homepage": "https://github.com/TomiSaputraa/minesweeper#readme",
   "description": "",
   "devDependencies": {
-    "typescript": "^5.5.4"
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react": "^7.35.0",
+    "globals": "^15.9.0",
+    "prettier": "3.3.3",
+    "prettier-eslint": "^16.3.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.3.0"
   }
 }
