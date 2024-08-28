@@ -3,6 +3,9 @@ var hello: string = "dsad";
 let a: boolean = false;
 let b: number = 123;
 
+// Type data generic :
+let c: Array<string>;
+
 // type : Dalam TypeScript, type adalah cara untuk menentukan struktur dan bentuk data.
 type User = {
   name: string;
@@ -12,10 +15,13 @@ type User = {
 // kekurangan type tidak ada extends
 
 // interface : Interface adalah fitur TypeScript yang memungkinkan Anda menentukan struktur, properti, dan metode objek.
-interface BasicUser {
+
+// Type data generic : Generik di TypeScript memungkinkan penulisan kode yang dapat bekerja dengan berbagai tipe data sekaligus menjaga keamanan tipe. Generik memudahkan penulisan kode yang dapat digunakan kembali.
+interface BasicUser<A = boolean> {
+  //contoh generic dengan tipe data default
   name: string;
   age: number;
-  married: boolean;
+  married: A;
   permission?: string[]; // tanda `?` tanda tidak require atau boleh tidak di isi
 }
 
@@ -24,12 +30,28 @@ interface BasicUser {
 //   permission: string[]; // contoh tipe objek string array
 // }
 
-let user: BasicUser = {
+let user: BasicUser<boolean> = {
   // contoh penggunaan type untuk data objek
   name: "Tomi",
   age: 23,
   married: false,
 };
+
+let usersArray: BasicUser[] = [user, user, user];
+
+// dari pada menulis seperti ini
+/* 
+function firstUser(usersArray: BasicUser[]): BasicUser {
+  return usersArray[0];
+}
+*/
+
+// Tulis seperti ini menggunakan generic
+function getFirst<T>(arr: T[]): T {
+  return arr[0];
+}
+
+console.log(getFirst<BasicUser>(usersArray));
 
 const user2: BasicUser = {
   name: "Tomi",

@@ -67,10 +67,30 @@ interface BasicUser {
 ```
 
 - **Extends Interface**:
-  
+
   Contoh memperluas interface:
+
   ```ts
   interface UserWithPermission extends BasicUser {
     permission: string[]; // contoh tipe objek string array
   }
   ```
+
+## **Tipe generic**
+
+Generik di TypeScript memungkinkan penulisan kode yang dapat bekerja dengan berbagai tipe data sekaligus menjaga keamanan tipe. Generik memudahkan penulisan kode yang dapat digunakan kembali.
+
+contoh :
+
+```ts
+function getFirstElement<T>(arr: T[]): T {
+  return arr[0];
+}
+
+const numberArray: number[] = [1, 2, 3, 4, 5];
+const stringArray: string[] = ["apple", "banana", "orange"];
+
+// 👇 Note generic value disimpan kedalam <number> & <string>
+const firstNumber = getFirstElement<number>(numberArray);
+const firstString = getFirstElement<string>(stringArray);
+```
