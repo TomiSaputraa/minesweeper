@@ -412,3 +412,51 @@ function greet(name: string, age: number) {
 
 type GreetParameters = Parameters<typeof greet>;
 ```
+
+## Section 3 : React Intro
+
+### Setup babel dan React
+
+TC39 adalah singkatan dari Technical Committee 39, yaitu komite yang bertanggung jawab untuk mengembangkan dan memelihara spesifikasi bahasa ECMAScript. ECMAScript adalah spesifikasi yang mendefinisikan cara kerja JavaScript.
+
+#### Babel
+
+Babel.js adalah toolchain atau kompiler JavaScript yang mengubah kode ECMAScript 2015+ menjadi versi JavaScript yang kompatibel dengan versi lama. Babel.js dapat digunakan untuk: Mengubah sintaksis, Menambahkan fitur polyfill yang hilang di lingkungan target, Mengubah kode sumber.
+
+Setup babel untuk react :
+
+```bash
+yarn add --dev @babel/core @babel/cli @babel/preset-env @babel/preset-react @babel/preset-typescript
+```
+
+Buat file `babel.config.js` dengan settingan seperti ini : 
+
+```js
+module.exports = {
+  presets: [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript",
+  ],
+};
+```
+
+Jalankan command berikut untuk check apakah babel sudah berhasil di setup : 
+
+```bash
+npx babel src --out-dir lib --extensions .ts,.tsx
+#npx babel <nama folder sumber> --out-dir <nama folder hasil> --extensions .ts,.tsx
+```
+
+#### React
+
+Cara setup react :
+```bash
+yarn add react react-dom --save
+```
+
+Jika menggunakan typescipt tambahkan :
+
+```bash
+yarn add -D @types/react @types/react-dom
+```
