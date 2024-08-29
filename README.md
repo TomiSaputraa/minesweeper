@@ -190,3 +190,130 @@ const userFull: FullUser<boolean, Permission> = {
   ```
 
   **Kegunaan**: Tuple digunakan ketika Anda memerlukan array dengan elemen yang memiliki tipe yang berbeda-beda, tetapi Anda tahu berapa banyak elemen yang harus ada dan apa tipenya.
+
+### UtilityTypes
+
+- `Partial<T>`
+  
+Membuat semua properti dari tipe T menjadi opsional.
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+};
+
+// Partial<Person> akan menjadi:
+// {
+//   name?: string;
+//   age?: number;
+// }
+
+const partialPerson: Partial<Person> = {
+  name: "John"
+};
+```
+
+- `Required<T>`
+  
+Membuat semua properti dari tipe T menjadi wajib.
+
+```ts
+type Person = {
+  name?: string;
+  age?: number;
+};
+
+// Required<Person> akan menjadi:
+// {
+//   name: string;
+//   age: number;
+// }
+
+const requiredPerson: Required<Person> = {
+  name: "John",
+  age: 30
+};
+```
+
+- `Readonly<T>`
+  
+Membuat semua properti dari tipe T menjadi hanya-baca (immutable) atau readonly.
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+};
+
+// Readonly<Person> akan menjadi:
+// {
+//   readonly name: string;
+//   readonly age: number;
+// }
+
+const readonlyPerson: Readonly<Person> = {
+  name: "John",
+  age: 30
+};
+
+// readonlyPerson.age = 31; // Error: Cannot assign to 'age' because it is a read-only property.
+```
+
+- `Omit<T, K>`
+  
+Membuat tipe baru dari tipe T dengan menghilangkan properti tertentu K.
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+  location: string;
+};
+
+// Omit<Person, 'location'> akan menjadi:
+// {
+//   name: string;
+//   age: number;
+// }
+
+const omittedPerson: Omit<Person, 'location'> = {
+  name: "John",
+  age: 30
+};
+```
+
+- `Record<K, T>`
+  
+Membuat tipe objek dengan kunci K dan nilai T.
+
+```ts
+type PageInfo = {
+  title: string;
+};
+
+// Record<string, PageInfo> akan menjadi:
+// {
+//   [key: string]: PageInfo;
+// }
+
+const pageInfo: Record<string, PageInfo> = {
+  home: { title: "Home" },
+  about: { title: "About" }
+};
+```
+
+- `ReturnType<T>`
+  
+Mengambil tipe pengembalian (return type) dari fungsi T.
+
+```ts
+function getUser() {
+  return { name: "John", age: 30 };
+}
+
+// ReturnType<typeof getUser> akan menjadi:
+// { name: string; age: number; }
+
+type UserType = ReturnType<typeof getUser>;
+```

@@ -160,3 +160,86 @@ const userFull2: FullUser2<boolean> = {
   account: 12,
   permission: ["admin", "user"],
 };
+
+// => UtilityTypes
+
+type BasicUser3<A = boolean, P = TuplePermission2> = {
+  //readonly name: string;
+  name: string;
+  age: number;
+  married: A;
+  permission?: P;
+};
+
+type FullUser3<A = boolean, P = string[]> = BasicUser3<A, P> & AdvanceUser2;
+
+const userFull3: FullUser3<boolean> = {
+  name: "antip",
+  age: 21,
+  married: false,
+  account: 12,
+  permission: ["admin", "user"],
+};
+// userFull3.name = "sdsa"; // error : Cannot assign to 'name' because it is a read-only property.
+
+type BasicUserReadonly = Readonly<BasicUser3>;
+type BasicUserRequired = Required<BasicUser3>;
+type BasicUserPartial = Partial<BasicUser3>; // Seperti optional
+
+// bisa digabung seperti ini
+type BasicUserReadonlyRequired = Readonly<Required<BasicUser3>>;
+type BasicUserReadonlyPartial = Readonly<Partial<BasicUser3>>;
+
+interface DepartemensForPermission {
+  depName: string;
+  level: number;
+}
+
+/* 
+Record dalam TypeScript adalah tipe utilitas generik yang membuat tipe objek dengan kunci tertentu dari tipe tertentu dan nilai-nilai yang bertipe lain yang ditentukan. Tipe Record didefinisikan sebagai Record<K, T>, di mana K mewakili tipe kunci dan T mewakili tipe nilai.
+Record<K extends keyof any, T>
+*/
+const DepsForPermiss: Record<Permission2, DepartemensForPermission> = {
+  admin: {
+    depName: "security",
+    level: 10,
+  },
+  user: {
+    depName: "sales",
+    level: 5,
+  },
+  manager: {
+    depName: "sales",
+    level: 10,
+  },
+};
+
+type BasicUser4<A = boolean, P = TuplePermission2> = {
+  name: string;
+  age: number;
+  married: A;
+  permission?: P;
+};
+
+/* 
+Omit adalah utilitas dalam TypeScript yang memungkinkan pengembang membuat tipe baru dengan mengecualikan properti tertentu dari tipe yang sudah ada.
+
+type Omit<T, K extends keyof any>
+*/
+type BasicUserWithoutPermission = Omit<BasicUser4, "permission">; //contoh hilangkan key permission
+
+/* 
+Exclude adalah sebuah tipe utilitas di TypeScript yang memungkinkan Anda untuk mengecualikan anggota tertentu dari tipe gabungan yang telah ditetapkan.
+*/
+type PermissionWithoutAdmin = Exclude<Permission2, "admin">; // //contoh hilangkan value 'admin'
+
+/* 
+ReturnType adalah tipe utilitas di TypeScript yang mengambil tipe pengembalian dari fungsi atau tipe yang dapat dipanggil. Tipe ini dapat berguna saat bekerja dengan basis kode yang kompleks atau saat mencoba menerapkan tipe pengembalian tertentu dalam TypeScript.
+*/
+function getFirst2<T>(arr: T[]): T {
+  return arr[0];
+}
+
+type BasicFunction = () => string[];
+
+type GetFirstReturnType = ReturnType<BasicFunction>; // akan mereturn string array
