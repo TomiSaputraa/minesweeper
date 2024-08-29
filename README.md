@@ -136,3 +136,57 @@ const userFull: FullUser<boolean, Permission> = {
   permission: ["admin", "user", "manager"],
 };
 ```
+
+### Unknown, never and Tuple
+
+- **Unknown**
+  
+  unknown adalah tipe yang kurang lebih mirip dengan any, tetapi lebih aman. Tipe ini digunakan ketika tipe dari sebuah nilai tidak diketahui pada saat kompilasi. Anda tidak bisa melakukan operasi apa pun pada nilai unknown tanpa memeriksa atau menyaring tipe datanya terlebih dahulu.
+
+  ```ts
+  let someValue: unknown;
+
+  someValue = "Hello, World!";
+  console.log(someValue); // Bisa diakses, tapi dengan tipe unknown
+
+  if (typeof someValue === "string") {
+    // Hanya setelah pengecekan tipe, operasi string bisa dilakukan
+    console.log(someValue.toUpperCase());
+  }
+  ```
+
+  **Kegunaan**: Berguna ketika Anda menginginkan fleksibilitas tipe, tetapi tetap menginginkan keamanan dengan pengecekan tipe sebelum operasi tertentu dilakukan.
+
+- **Never**
+  
+  never adalah tipe yang digunakan untuk menyatakan bahwa suatu nilai tidak akan pernah terjadi. Biasanya digunakan dalam fungsi yang tidak pernah mengembalikan nilai (misalnya, fungsi yang selalu melempar error atau fungsi yang menjalankan loop tanpa akhir).
+
+  ```ts
+  function throwError(message: string): never {
+  throw new Error(message);
+  }
+
+  function infiniteLoop(): never {
+    while (true) {
+      // Loop tanpa akhir
+    }
+  }
+  ```
+
+  **Kegunaan**: never digunakan untuk menunjukkan bahwa sebuah fungsi tidak akan pernah berhasil menyelesaikan eksekusi dengan nilai return yang valid. Ini membantu compiler dan developer lain dalam memahami alur program.
+
+- **Tuple**
+  
+  Tuple adalah tipe khusus di TypeScript yang memungkinkan Anda menentukan array dengan jumlah elemen tetap dan tipe elemen yang spesifik. Ini berguna ketika Anda tahu persis berapa banyak elemen yang harus ada dalam array dan apa tipe dari masing-masing elemen tersebut.
+
+  ```ts
+  let person: [string, number];
+
+  person = ["John Doe", 30]; // Ini valid
+  // person = [30, "John Doe"]; // Ini tidak valid karena urutan dan tipe tidak sesuai
+
+  console.log(person[0]); // "John Doe"
+  console.log(person[1]); // 30
+  ```
+
+  **Kegunaan**: Tuple digunakan ketika Anda memerlukan array dengan elemen yang memiliki tipe yang berbeda-beda, tetapi Anda tahu berapa banyak elemen yang harus ada dan apa tipenya.

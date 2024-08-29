@@ -93,3 +93,70 @@ const userFull: FullUser<boolean, Permission> = {
 };
 
 console.log(userFull);
+
+//=> Unknown, never and Tuple
+/* 
+unknown Digunakan sebagai alternatif yang lebih baik dari any. Ketika sebuah nilai dideklarasikan menggunakan unknown, TypeScript tidak mengetahui tipenya, yang berarti Anda tidak dapat menggunakan salah satu metode yang tersedia hingga Anda secara eksplisit "mempersempit" tipenya ke sesuatu yang spesifik. 
+*/
+
+// function dengan tipe return void
+const logFunction = (data: unknown): void => {
+  // untuk tipe data unknown tipe data child nya juga harus unknown tidak bisa tipe data primitif
+  const data2: unknown = data;
+  console.log(data);
+  console.log(data2);
+
+  throw new Error("Bad");
+
+  // return unknown; // tidak bisa
+  // return string; // tidak bisa
+  // return undefined; //tipe function void hanya bisa return undefined
+};
+
+// function dengan tipe return never
+/* 
+never Digunakan ketika Anda kehabisan tipe data dan tidak memiliki nilai apa pun. Never adalah tipe yang paling mustahil, karena mewakili nilai yang tidak pernah muncul. 
+*/
+const logFunction2 = (data: unknown): never => {
+  const data2: unknown = data;
+  // untuk tipe data unknown tipe data child nya juga harus unknown tidak bisa tipe data primitif
+  console.log(data);
+  console.log(data2);
+
+  throw new Error("Bad");
+
+  // return unknown; // tidak bisa
+  // return string; // tidak bisa
+  // return undefined; //tipe function void hanya bisa return undefined
+};
+
+// Tuple
+/* 
+Tuple dalam TypeScript adalah tipe data yang dapat digunakan seperti variabel lainnya. Tuple adalah array bertipe dengan panjang yang telah ditetapkan dan tipe untuk setiap indeksnya. Tuple dapat digunakan untuk menghubungkan beberapa data dengan sintaksis yang lebih sedikit daripada objek yang dikunci.
+*/
+type Permission2 = "admin" | "manager" | "user";
+
+type TuplePermission2 = [Permission2, number];
+
+const perm: TuplePermission2 = ["admin", 12]; //dengan tuple kita hanya bisa assign 2 value
+
+type BasicUser2<A = boolean, P = TuplePermission2> = {
+  name: string;
+  age: number;
+  married: A;
+  permission?: P;
+};
+
+type AdvanceUser2 = {
+  account: number;
+};
+
+type FullUser2<A = boolean, P = string[]> = BasicUser2<A, P> & AdvanceUser2;
+
+const userFull2: FullUser2<boolean> = {
+  name: "antip",
+  age: 21,
+  married: false,
+  account: 12,
+  permission: ["admin", "user"],
+};
