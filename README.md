@@ -66,7 +66,7 @@ interface BasicUser {
 }
 ```
 
-- **Extends Interface**:
+#### **Extends Interface**:
 
   Contoh memperluas interface:
 
@@ -97,7 +97,7 @@ const firstString = getFirstElement<string>(stringArray);
 
 ### Extends types, multiple generic type, union types
 
-- **Extends types**
+#### **Extends types**
 
 Dalam TypeScript, kita dapat memperluas type menggunakan &, contoh:
 
@@ -105,7 +105,7 @@ Dalam TypeScript, kita dapat memperluas type menggunakan &, contoh:
 type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AdvanceUser;
 ```
 
-- **Union Type**
+#### **Union Type**
 
 Union types memungkinkan sebuah variabel untuk memiliki lebih dari satu tipe. Ini sangat berguna ketika sebuah nilai bisa berupa beberapa tipe yang berbeda.
 
@@ -117,7 +117,7 @@ Union types memungkinkan sebuah variabel untuk memiliki lebih dari satu tipe. In
   ```
 
 
-- **Multiple Generic Types**
+#### **Multiple Generic Types**
 
 TypeScript mendukung penggunaan beberapa tipe generik dalam satu fungsi atau kelas. Ini memungkinkan kita untuk membuat kode yang lebih fleksibel dan dapat digunakan kembali.
 
@@ -139,7 +139,7 @@ const userFull: FullUser<boolean, Permission> = {
 
 ### Unknown, never and Tuple
 
-- **Unknown**
+#### **Unknown**
   
   unknown adalah tipe yang kurang lebih mirip dengan any, tetapi lebih aman. Tipe ini digunakan ketika tipe dari sebuah nilai tidak diketahui pada saat kompilasi. Anda tidak bisa melakukan operasi apa pun pada nilai unknown tanpa memeriksa atau menyaring tipe datanya terlebih dahulu.
 
@@ -157,7 +157,7 @@ const userFull: FullUser<boolean, Permission> = {
 
   **Kegunaan**: Berguna ketika Anda menginginkan fleksibilitas tipe, tetapi tetap menginginkan keamanan dengan pengecekan tipe sebelum operasi tertentu dilakukan.
 
-- **Never**
+#### **Never**
   
   never adalah tipe yang digunakan untuk menyatakan bahwa suatu nilai tidak akan pernah terjadi. Biasanya digunakan dalam fungsi yang tidak pernah mengembalikan nilai (misalnya, fungsi yang selalu melempar error atau fungsi yang menjalankan loop tanpa akhir).
 
@@ -175,7 +175,7 @@ const userFull: FullUser<boolean, Permission> = {
 
   **Kegunaan**: never digunakan untuk menunjukkan bahwa sebuah fungsi tidak akan pernah berhasil menyelesaikan eksekusi dengan nilai return yang valid. Ini membantu compiler dan developer lain dalam memahami alur program.
 
-- **Tuple**
+#### **Tuple**
   
   Tuple adalah tipe khusus di TypeScript yang memungkinkan Anda menentukan array dengan jumlah elemen tetap dan tipe elemen yang spesifik. Ini berguna ketika Anda tahu persis berapa banyak elemen yang harus ada dalam array dan apa tipe dari masing-masing elemen tersebut.
 
@@ -193,7 +193,7 @@ const userFull: FullUser<boolean, Permission> = {
 
 ### UtilityTypes
 
-- `Partial<T>`
+#### `Partial<T>`
   
 Membuat semua properti dari tipe T menjadi opsional.
 
@@ -214,7 +214,7 @@ const partialPerson: Partial<Person> = {
 };
 ```
 
-- `Required<T>`
+#### `Required<T>`
   
 Membuat semua properti dari tipe T menjadi wajib.
 
@@ -236,7 +236,7 @@ const requiredPerson: Required<Person> = {
 };
 ```
 
-- `Readonly<T>`
+#### `Readonly<T>`
   
 Membuat semua properti dari tipe T menjadi hanya-baca (immutable) atau readonly.
 
@@ -260,7 +260,30 @@ const readonlyPerson: Readonly<Person> = {
 // readonlyPerson.age = 31; // Error: Cannot assign to 'age' because it is a read-only property.
 ```
 
-- `Omit<T, K>`
+#### `Pick<T, K>`
+  
+Membuat tipe baru dari tipe T dengan memilih properti yang spesifik K.
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+  location: string;
+};
+
+// Pick<Person, 'name' | 'age'> akan menjadi:
+// {
+//   name: string;
+//   age: number;
+// }
+
+const pickedPerson: Pick<Person, 'name' | 'age'> = {
+  name: "John",
+  age: 30
+};
+```
+
+#### `Omit<T, K>`
   
 Membuat tipe baru dari tipe T dengan menghilangkan properti tertentu K.
 
@@ -283,7 +306,7 @@ const omittedPerson: Omit<Person, 'location'> = {
 };
 ```
 
-- `Record<K, T>`
+#### `Record<K, T>`
   
 Membuat tipe objek dengan kunci K dan nilai T.
 
@@ -303,7 +326,46 @@ const pageInfo: Record<string, PageInfo> = {
 };
 ```
 
-- `ReturnType<T>`
+#### `Exclude<T, U>`
+  
+Membuat tipe baru dari tipe T dengan mengecualikan tipe-tipe yang ada di U.
+
+```ts
+type T = string | number | boolean;
+
+// Exclude<T, string> akan menjadi:
+// number | boolean
+
+type NonString = Exclude<T, string>;
+```
+
+#### `Extract<T, U>`
+  
+Membuat tipe baru dari tipe T dengan hanya memilih tipe-tipe yang juga ada di U.
+
+```ts
+type T = string | number | boolean;
+
+// Extract<T, string | number> akan menjadi:
+// string | number
+
+type StringOrNumber = Extract<T, string | number>;
+```
+
+#### `NonNullable<T>`
+  
+Membuat tipe baru dari tipe T dengan menghilangkan null dan undefined.
+
+```ts
+type T = string | number | null | undefined;
+
+// NonNullable<T> akan menjadi:
+// string | number
+
+type NonNull = NonNullable<T>;
+```
+
+#### `ReturnType<T>`
   
 Mengambil tipe pengembalian (return type) dari fungsi T.
 
@@ -316,4 +378,37 @@ function getUser() {
 // { name: string; age: number; }
 
 type UserType = ReturnType<typeof getUser>;
+```
+
+#### `InstanceType<T>`
+  
+Mengambil tipe instance dari konstruktor atau kelas T.
+
+```ts
+class Person {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+// InstanceType<typeof Person> akan menjadi:
+// Person
+
+type PersonInstance = InstanceType<typeof Person>;
+```
+
+#### `Parameters<T>`
+  
+Mengambil tipe parameter dari fungsi T.
+
+```ts
+function greet(name: string, age: number) {
+  return `Hello, ${name}. You are ${age} years old.`;
+}
+
+// Parameters<typeof greet> akan menjadi:
+// [string, number]
+
+type GreetParameters = Parameters<typeof greet>;
 ```
