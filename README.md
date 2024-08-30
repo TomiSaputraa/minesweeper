@@ -460,3 +460,119 @@ Jika menggunakan typescipt tambahkan :
 ```bash
 yarn add -D @types/react @types/react-dom
 ```
+
+### Webpack
+
+Webpack adalah alat yang berfungsi untuk menggabungkan file JavaScript menjadi satu atau lebih bundel. Webpack merupakan bundler modul sumber terbuka dan gratis yang dibuat terutama untuk JavaScript.
+
+**Berikut adalah beberapa fungsi Webpack:** 
+- Menggabungkan file JavaScript, font, gambar, dan CSS ke dalam satu file 
+  
+- Membantu memuat modul aplikasi dan dependensinya 
+
+- Menangani berbagai definisi dan kompatibilitas browser 
+
+- Memproses file seperti SASS dan LESS menjadi CSS 
+  
+- Mengubah JSX dan ECMAScript modern menjadi JavaScript yang ramah browser 
+  
+- Memelihara runtime yang berisi informasi yang diperlukan untuk menjalankan aplikasi 
+
+**Setup Webpack**
+
+Command install: 
+
+```bash
+yarn add -D webpack webpack-cli
+```
+
+Lalu buat file `webpack.config.js` dengan settingan seperti berikut : 
+```js
+const path = require("path");
+
+module.exports = {
+  entry: "./src/index.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+};
+```
+
+Tambahkan script commad pada file `package.json`
+```json
+"scripts": {
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+```
+
+Penting: install `webpack loader`
+
+Fungsi webpack loader adalah untuk memproses file terlebih dahulu, sehingga memungkinkan webpack untuk menggabungkan sumber daya statis selain JavaScript. Loader adalah fungsi JavaScript yang mengubah kode sumber modul yang diimpor.
+
+Dok : https://webpack.js.org/loaders/#root
+
+Install loader dengan command : 
+
+```bash
+yarn add -D babel-loader 
+#untuk babel
+yarn add -D css-loader 
+#untuk css
+```
+
+**Dan install loader lainnya sesuai keperluan**
+
+hasil akhir dari configurasi webpack akan seperti ini : 
+
+```js
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  entry: "./src/index.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    clean: true, // Membersihkan folder dist sebelum build baru
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|ts)x?$/,
+        use: "babel-loader",
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        type: "asset/resource",
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ],
+  devServer: {
+    static: path.resolve(__dirname, "dist"),
+    compress: true,
+    port: 3000,
+    open: true,
+    hot: true,
+  },
+};
+```
+
