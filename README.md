@@ -576,3 +576,87 @@ module.exports = {
 };
 ```
 
+### Section 4 : Jest, TDD
+
+#### Jest
+
+Jest adalah Framework Testing JavaScript yang menyenangkan dengan fokus pada kesederhanaan. Ia bekerja dengan proyek yang menggunakan: Babel, TypeScript, Node, React, Angular, Vue dan banyak lagi!
+
+- **Setup jest**
+  
+  Install jest dan types untuk typescript :
+
+  ```bash
+  yarn add jest @types/jest -D
+  ```
+
+  Lalu inisialisasi proyek:
+  ```bash
+  npx jest --init
+  ```
+
+  Lalu install : 
+  ```bash
+  yarn add --dev jest-environment-jsdom
+  ```
+
+  ubah settingan fie `jest.config.js` :
+  ```js
+  testEnvironment: "jest-environment-jsdom",
+  ```
+
+  lalu jika menggunakan typescript edit file `tsconfig.json` tambahkan :
+  ```json
+  "types": [
+      "jest"
+    ]
+  ```
+
+#### TDD Vs TLD
+
+Dalam konteks pengujian JavaScript atau TypeScript, TLD dan TDD memiliki arti yang berbeda:
+
+**TLD (Test-Last Development)**
+ 
+Definisi: Test-Last Development adalah pendekatan pengembangan perangkat lunak di mana pengujian dilakukan setelah kode utama selesai ditulis. Ini adalah metode tradisional yang sering digunakan ketika pengujian tidak menjadi prioritas dalam proses pengembangan.
+
+**Kelebihan**:
+
+- Pengembangan bisa lebih cepat karena tidak perlu menulis tes terlebih dahulu.
+- Tim bisa fokus pada penyelesaian fitur terlebih dahulu.
+
+**Kekurangan**:
+
+- Pengujian bisa jadi kurang lengkap karena hanya mencakup skenario yang dipikirkan setelah kode ditulis.
+- Kualitas kode mungkin lebih rendah karena pengujian tidak menjadi bagian integral dari proses pengembangan.
+- Potensi untuk lebih banyak bug atau masalah tersembunyi karena tidak ada pengujian yang memandu pengembangan.
+  
+
+**TDD (Test-Driven Development)**
+  
+**Definisi**: Test-Driven Development adalah pendekatan pengembangan di mana pengujian ditulis sebelum kode yang akan diuji. Dalam TDD, Anda menulis tes unit kecil terlebih dahulu, lalu menulis kode yang membuat tes tersebut lulus, dan akhirnya refactor kode sesuai kebutuhan.
+
+Proses TDD:
+
+- Red: Tuliskan tes untuk fungsi atau fitur yang belum ada dan biarkan tes tersebut gagal.
+- Green: Tuliskan kode minimal yang diperlukan untuk lulus tes.
+- Refactor: Perbaiki dan optimalkan kode dengan tetap memastikan semua tes tetap lulus.
+  
+**Kelebihan**:
+
+Membantu memastikan bahwa setiap bagian kode memiliki pengujian.
+Membuat kode lebih modular dan lebih mudah dipelihara.
+Mengurangi jumlah bug karena kode diuji sejak awal.
+
+**Kekurangan**:
+
+Dapat memperlambat proses pengembangan di awal karena waktu dihabiskan untuk menulis tes.
+Memerlukan disiplin dan pemahaman yang kuat tentang TDD.
+
+- **Perbandingan dan Penggunaan**
+  
+TLD lebih umum digunakan di proyek yang sudah berjalan atau ketika pengujian tidak menjadi fokus utama dari awal pengembangan.
+
+TDD sering digunakan dalam pengembangan modern, terutama dalam lingkungan yang mementingkan kualitas kode, seperti dalam proyek dengan pengembangan berkelanjutan atau DevOps.
+
+Dalam pengembangan JavaScript atau TypeScript, TDD sering diadopsi bersama dengan framework pengujian seperti Jest, Mocha, atau Jasmine, karena framework tersebut mendukung penulisan dan pelaksanaan tes dengan mudah.
