@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1725036743859" clover="3.2.0">
-  <project timestamp="1725036743859" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2" elements="4" coveredelements="4" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
-    <file name="mathFunction.ts" path="D:\Code\ReactJs\minesweeper\src\mathFunction.ts">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="3" count="1" type="stmt"/>
+<coverage generated="1725092074865" clover="3.2.0">
+  <project timestamp="1725092074865" name="All files">
+    <metrics statements="14" coveredstatements="13" conditionals="7" coveredconditionals="6" methods="3" coveredmethods="3" elements="24" coveredelements="22" complexity="0" loc="14" ncloc="14" packages="1" files="1" classes="1"/>
+    <file name="Field.ts" path="D:\Code\ReactJs\minesweeper\src\helpers\Field.ts">
+      <metrics statements="14" coveredstatements="13" conditionals="7" coveredconditionals="6" methods="3" coveredmethods="3"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="17" count="19" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="20" count="4" type="cond" truecount="4" falsecount="0"/>
+      <line num="21" count="2" type="stmt"/>
+      <line num="24" count="2" type="stmt"/>
+      <line num="25" count="2" type="stmt"/>
+      <line num="27" count="2" type="stmt"/>
+      <line num="29" count="2" type="stmt"/>
+      <line num="30" count="2" type="stmt"/>
+      <line num="31" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="32" count="2" type="stmt"/>
+      <line num="37" count="0" type="stmt"/>
     </file>
   </project>
 </coverage>
