@@ -31,7 +31,7 @@ export const fieldGenerator = (size: number, probability: number): Field => {
       if (restCellWithBomb === 0) {
         return result;
       }
-      if (restCellWithBomb / unprocessedCells > 0) {
+      if (restCellWithBomb / unprocessedCells > Math.random()) {
         result[i][j] = CellState.bomb;
         restCellWithBomb--;
       }
