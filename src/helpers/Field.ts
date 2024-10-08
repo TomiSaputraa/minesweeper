@@ -16,21 +16,26 @@ export const emptyFieldGenerator = (
   state: Cell = CellState.empty,
 ): Field => new Array(size).fill(null).map(() => new Array(size).fill(state));
 
-export const fieldGenerator = (size: number, dencity: number): Field => {
-  if (dencity > 1 || dencity < 0) {
-    throw new Error("Dencity must be between 0 and 1");
+export const fieldGenerator = (size: number, probability: number): Field => {
+  if (probability > 1 || probability < 0) {
+    throw new Error("Probability must be between 0 and 1");
   }
 
-  const freeCellCount = size * size;
-  const cellWithBomb = freeCellCount * dencity;
+  let unprocessedCells = size * size;
+  let restCellWithBomb = unprocessedCells * probability;
 
   const result: Field = emptyFieldGenerator(size);
 
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
-      if (cellWithBomb === 0) {
+      if (restCellWithBomb === 0) {
         return result;
       }
+      if (restCellWithBomb / unprocessedCells > 0) {
+        result[i][j] = CellState.bomb;
+        restCellWithBomb--;
+      }
+      unprocessedCells--;
     }
   }
 
