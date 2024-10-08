@@ -28,7 +28,7 @@ describe("Field generator", () => {
 
   describe("simple case", () => {
     it("Wrong density", () => {
-      const errorText = "Dencity must be between 0 and 1";
+      const errorText = "Probability must be between 0 and 1";
       expect(() => fieldGenerator(1, -1)).toThrow(errorText);
       expect(() => fieldGenerator(1, 2)).toThrow(errorText);
     });
@@ -50,8 +50,38 @@ describe("Field generator", () => {
         [empty, empty, empty, empty, empty, empty, empty, empty, empty, empty],
       ]);
     });
-    // it("Smallest possible field with mine", () => {
-    //   expect(fieldGenerator(1, 1)).toStrictEqual([[bomb]]);
-    // });
+    it("Smallest possible field with mine", () => {
+      expect(fieldGenerator(1, 1)).toStrictEqual([[bomb]]);
+    });
+
+    it("2x2 field with mines", () => {
+      expect(fieldGenerator(2, 1)).toStrictEqual([
+        [bomb, bomb],
+        [bomb, bomb],
+      ]);
+    });
+    it("2x2 field with 50% probability", () => {
+      // expect(fieldGenerator(2, 0.5)).toStrictEqual([
+      //   [bomb, bomb],
+      //   [empty, empty],
+      // ]);
+      // expect(fieldGenerator(4, 0.5)).toStrictEqual([
+      //   [bomb, bomb, bomb, bomb],
+      //   [bomb, bomb, bomb, bomb],
+      //   [empty, empty, empty, empty],
+      //   [empty, empty, empty, empty],
+      // ]);
+
+      const field = fieldGenerator(2, 0.5);
+      const flatField = field.flat();
+
+      console.table(field);
+      console.table(flatField);
+
+      const cellsWithBombs = flatField.filter((cell) => cell === bomb);
+      const emptyCells = flatField.filter((cell) => cell === empty);
+      expect(cellsWithBombs).toHaveLength(2);
+      expect(emptyCells).toHaveLength(2);
+    });
   });
 });
